@@ -47,7 +47,7 @@ export interface ComponentDefinition {
 export interface FicheConfig {
   slug: string;
   name: string;
-  description: string;
+  description?: string;
   category: FicheCategory;
   showComponents?: boolean;
   components: ComponentDefinition[];
