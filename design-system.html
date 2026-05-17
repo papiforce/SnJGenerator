@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Sengoku no Jidai — Design System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="design-system.css">
+<style>
+  body { padding-bottom: 120px; }
+  .ds-page { max-width: 1240px; margin: 0 auto; padding: 60px 40px; }
+  .ds-intro { text-align: center; margin-bottom: 80px; }
+  .ds-intro__kanji { font-family: 'Noto Serif JP', serif; font-size: 14px; letter-spacing: .8em; color: var(--sg-gold-soft); margin-bottom: 16px; opacity: .8; }
+  .ds-intro__title { font-family: 'Cinzel', serif; font-size: 48px; letter-spacing: .14em; text-transform: uppercase; color: var(--sg-paper-50); margin-bottom: 12px; }
+  .ds-intro__sub { font-family: 'IM Fell English', serif; font-style: italic; font-size: 18px; color: var(--sg-paper-200); }
+
+  .ds-section { margin-top: 80px; }
+  .ds-section__head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--sg-ink-800); }
+  .ds-section__num { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: .3em; color: var(--sg-gold); }
+  .ds-section__title { font-family: 'Cinzel', serif; font-size: 22px; letter-spacing: .2em; text-transform: uppercase; color: var(--sg-paper-50); }
+  .ds-section__kanji { font-family: 'Noto Serif JP', serif; font-size: 16px; color: var(--sg-gold-soft); margin-left: auto; letter-spacing: .3em; }
+
+  .ds-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 24px; background: var(--sg-ink-900); border: 1px solid var(--sg-ink-800); border-radius: var(--sg-r-md); margin-bottom: 16px; }
+  .ds-row--col { flex-direction: column; align-items: stretch; }
+  .ds-label { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: .3em; color: var(--sg-paper-400); text-transform: uppercase; min-width: 130px; }
+
+  .ds-swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  .ds-swatch { aspect-ratio: 1; border-radius: var(--sg-r-sm); border: 1px solid var(--sg-ink-700); display: flex; flex-direction: column; justify-content: flex-end; padding: 10px; position: relative; overflow: hidden; }
+  .ds-swatch__name { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--sg-paper-100); letter-spacing: .05em; text-shadow: 0 1px 2px rgba(0,0,0,.8); }
+  .ds-swatch__hex { font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255,255,255,.5); margin-top: 2px; }
+
+  .ds-typescale > * { padding: 12px 0; border-bottom: 1px dashed var(--sg-ink-800); }
+  .ds-typescale > *:last-child { border-bottom: none; }
+  .ds-typescale__meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--sg-paper-400); margin-top: 4px; }
+
+  .ds-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .ds-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .ds-grid-1-2 { display: grid; grid-template-columns: 280px 1fr; gap: 20px; }
+
+  .ds-token-table { width: 100%; border-collapse: collapse; }
+  .ds-token-table td { padding: 8px 12px; border-bottom: 1px dashed var(--sg-ink-800); font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+  .ds-token-table td:first-child { color: var(--sg-gold-soft); }
+  .ds-token-table td:nth-child(2) { color: var(--sg-paper-200); }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV (real component preview) -->
+<nav class="sg-nav">
+  <div class="sg-nav__brand">SENGOKU <em>NO</em> JIDAI</div>
+  <div class="sg-nav__links">
+    <a class="sg-nav__link is-active" href="#">Design System</a>
+    <a class="sg-nav__link" href="index.html">Forum</a>
+  </div>
+  <div class="sg-nav__end">
+    <button class="sg-btn sg-btn--ghost sg-btn--sm">Connexion</button>
+    <button class="sg-btn sg-btn--primary sg-btn--sm">S'inscrire</button>
+  </div>
+</nav>
+
+<div class="ds-page">
+
+  <!-- INTRO -->
+  <header class="ds-intro">
+    <div class="ds-intro__kanji">戦国の時代</div>
+    <h1 class="ds-intro__title">Design System</h1>
+    <p class="ds-intro__sub">Tokens, typographie & composants — Sengoku no Jidai</p>
+  </header>
+
+  <!-- 01 COLORS -->
+  <section class="ds-section">
+    <div class="ds-section__head">
+      <span class="ds-section__num">— 01</span>
+      <h2 class="ds-section__title">Palette</h2>
+      <span class="ds-section__kanji">色彩</span>
+    </div>
+
+    <div class="ds-row ds-row--col">
+      <span class="ds-label">Encres / Bases</span>
+      <div class="ds-swatches">
+        <div class="ds-swatch" style="background: var(--sg-ink-1000)"><span class="ds-swatch__name">ink-1000</span><span class="ds-swatch__hex">#050505</span></div>
+        <div class="ds-swatch" style="background: var(--sg-ink-950)"><span class="ds-swatch__name">ink-950</span><span class="ds-swatch__hex">#0a0908</span></div>
+        <div class="ds-swatch" style="background: var(--sg-ink-900)"><span class="ds-swatch__name">ink-900</span><span class="ds-swatch__hex">#110f0d</span></div>
+        <div class="ds-swatch" style="background: var(--sg-ink-850)"><span class="ds-swatch__name">ink-850</span><span class="ds-swatch__hex">#17140f</span></div>
+        <div class="ds-swatch" style="background: var(--sg-ink-800)"><span class="ds-swatch__name">ink-800</span><span class="ds-swatch__hex">#1d1914</span></div>
+        <div class="ds-swatch" style="background: var(--sg-ink-700)"><span class="ds-swatch__name">ink-700</span><span class="ds-swatch__hex">#2a251d</span></div>
+      </div>
+    </div>
+
+    <div class="ds-row ds-row--col">
+      <span class="ds-label">Or — Identité primaire</span>
+      <div class="ds-swatches">
+        <div class="ds-swatch" style="background: var(--sg-gold-glow)"><span class="ds-swatch__name">gold-glow</span><span class="ds-swatch__hex">#e8c87a</span></div>
+        <div class="ds-swatch" style="background: var(--sg-gold)"><span class="ds-swatch__name">gold</span><span class="ds-swatch__hex">#c9a558</span></div>
+        <div class="ds-swatch" style="background: var(--sg-gold-soft)"><span class="ds-swatch__name">gold-soft</span><span class="ds-swatch__hex">#a48744</span></div>
+        <div class="ds-swatch" style="background: var(--sg-gold-dim)"><span class="ds-swatch__name">gold-dim</span><span class="ds-swatch__hex">#6e5a2d</span></div>
+      </div>
+    </div>
+
+    <div class="ds-row ds-row--col">
+      <span class="ds-label">朱 Shu — Rouge laque</span>
+      <div class="ds-swatches">
+        <div class="ds-swatch" style="background: var(--sg-shu)"><span class="ds-swatch__name">shu</span><span class="ds-swatch__hex">#8b2a20</span></div>
+        <div class="ds-swatch" style="background: var(--sg-shu-soft)"><span class="ds-swatch__name">shu-soft</span><span class="ds-swatch__hex">#6b1f18</span></div>
+        <div class="ds-swatch" style="background: var(--sg-shu-deep)"><span class="ds-swatch__name">shu-deep</span><span class="ds-swatch__hex">#45140f</span></div>
+      </div>
+    </div>
+
+    <div class="ds-row ds-row--col">
+      <span class="ds-label">紺 Kon — Bleu nuit</span>
+      <div class="ds-swatches">
+        <div class="ds-swatch" style="background: var(--sg-kon)"><span class="ds-swatch__name">kon</span><span class="ds-swatch__hex">#2a3a5e</span></div>
+        <div class="ds-swatch" style="background: var(--sg-kon-soft)"><span class="ds-swatch__name">kon-soft</span><span class="ds-swatch__hex">#1e2a44</span></div>
+        <div class="ds-swatch" style="background: var(--sg-kon-deep)"><span class="ds-swatch__name">kon-deep</span><span class="ds-swatch__hex">#131a2c</span></div>
+      </div>
+    </div>
+
+    <div class="ds-row ds-row--col">
+      <span class="ds-label">苔 Koke — Vert mousse</span>
+      <div class="ds-swatches">
+        <div class="ds-swatch" style="background: var(--sg-koke)"><span class="ds-swatch__name">koke</span><span class="ds-swatch__hex">#4a5d3a</span></div>
+        <div class="ds-swatch" style="background: var(--sg-koke-soft)"><span class="ds-swatch__name">koke-soft</span><span class="ds-swatch__hex">#384829</span></div>
+        <div class="ds-swatch" style="background: var(--sg-koke-deep)"><span class="ds-swatch__name">koke-deep</span><span class="ds-swatch__hex">#222c18</span></div>
+      </div>
+    </div>
+
+    <div class="ds-row ds-row--col">
+      <span class="ds-label">Parchemin / Texte</span>
+      <div class="ds-swatches">
+        <div class="ds-swatch" style="background: var(--sg-paper-50)"><span class="ds-swatch__name" style="color:#111">paper-50</span><span class="ds-swatch__hex" style="color:rgba(0,0,0,.4)">#f4ecd8</span></div>
+        <div class="ds-swatch" style="background: var(--sg-paper-100)"><span class="ds-swatch__name" style="color:#111">paper-100</span><span class="ds-swatch__hex" style="color:rgba(0,0,0,.4)">#e8dfc9</span></div>
+        <div class="ds-swatch" style="background: var(--sg-paper-200)"><span class="ds-swatch__name" style="color:#111">paper-200</span><span class="ds-swatch__hex" style="color:rgba(0,0,0,.4)">#c9bfa3</span></div>
+        <div class="ds-swatch" style="background: var(--sg-paper-300)"><span class="ds-swatch__name">paper-300</span><span class="ds-swatch__hex">#9c9278</span></div>
+        <div class="ds-swatch" style="background: var(--sg-paper-400)"><span class="ds-swatch__name">paper-400</span><span class="ds-swatch__hex">#6e664f</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 TYPOGRAPHY -->
+  <section class="ds-section">
+    <div class="ds-section__head">
+      <span class="ds-section__num">— 02</span>
+      <h2 class="ds-section__title">Typographie</h2>
+      <span class="ds-section__kanji">活字</span>
+    </div>
+
+    <div class="ds-row ds-row--col">
+      <div class="ds-typescale">
+        <div>
+          <h1 class="sg-h1">Sengoku no Jidai</h1>
+          <div class="ds-typescale__meta">.sg-h1 — Cinzel 56px / .14em</div>
+        </div>
+        <div>
+          <h2 class="sg-h2">L'ère des Royaumes Combattants</h2>
+          <div class="ds-typescale__meta">.sg-h2 — Cinzel 32px / .18em</div>
+        </div>
+        <div>
+          <h3 class="sg-h3">Hi no Kuni</h3>
+          <div class="ds-typescale__meta">.sg-h3 — Cinzel 20px / .2em</div>
+        </div>
+        <div>
+          <h4 class="sg-h4">Catégorie</h4>
+          <div class="ds-typescale__meta">.sg-h4 — Cinzel 14px / .24em — Or</div>
+        </div>
+        <div>
+          <p class="sg-subtitle">Au cœur d'un Japon féodal déchiré, les clans s'affrontent pour la suprématie.</p>
+          <div class="ds-typescale__meta">.sg-subtitle — IM Fell English italic 18px</div>
+        </div>
+        <div>
+          <p class="sg-body">Le forum Sengoku no Jidai vous transporte dans une époque où l'honneur, la trahison et la guerre forgent les destinées. Choisissez votre clan, écrivez votre légende.</p>
+          <div class="ds-typescale__meta">.sg-body — IM Fell English 15px</div>
+        </div>
+        <div>
+          <p class="sg-body-sm">Texte secondaire, descriptions courtes, méta-informations contextuelles.</p>
+          <div class="ds-typescale__meta">.sg-body-sm — IM Fell English 13px</div>
+        </div>
+        <div>
+          <p class="sg-eyebrow">— Avant-titre</p>
+          <div class="ds-typescale__meta">.sg-eyebrow — Cinzel 11px / .4em — Or</div>
+        </div>
+        <div>
+          <p class="sg-kanji">戦国の時代</p>
+          <div class="ds-typescale__meta">.sg-kanji — Noto Serif JP 14px / .4em</div>
+        </div>
+        <div>
+          <p class="sg-mono">128 sujets · 4,209 messages</p>
+          <div class="ds-typescale__meta">.sg-mono — JetBrains Mono 12px</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 BUTTONS -->
+  <section class="ds-section">
+    <div class="ds-section__head">
+      <span class="ds-section__num">— 03</span>
+      <h2 class="ds-section__title">Boutons</h2>
+      <span class="ds-section__kanji">釦</span>
+    </div>
+
+    <div class="ds-row">
+      <span class="ds-label">Primary</span>
+      <button class="sg-btn sg-btn--primary">Rejoindre le clan</button>
+      <button class="sg-btn sg-btn--primary sg-btn--sm">Connexion</button>
+    </div>
+    <div class="ds-row">
+      <span class="ds-label">Secondary</span>
+      <button class="sg-btn sg-btn--secondary">Découvrir</button>
+      <button class="sg-btn sg-btn--secondary sg-btn--sm">Voir tout</button>
+    </div>
+    <div class="ds-row">
+      <span class="ds-label">Ghost</span>
+      <button class="sg-btn sg-btn--ghost">Annuler</button>
+      <button class="sg-btn sg-btn--ghost sg-btn--sm">Plus tard</button>
+    </div>
+    <div class="ds-row">
+      <span class="ds-label">Danger</span>
+      <button class="sg-btn sg-btn--danger">Déclarer la guerre</button>
+    </div>
+    <div class="ds-row">
+      <span class="ds-label">Icon</span>
+      <button class="sg-btn sg-btn--icon" aria-label="Recherche">⚲</button>
+      <button class="sg-btn sg-btn--icon" aria-label="Notifications">⚑</button>
+      <button class="sg-btn sg-btn--icon" aria-label="Profil">人</button>
+    </div>
+  </section>
+
+  <!-- 04 TAGS / BADGES -->
+  <section class="ds-section">
+    <div class="ds-section__head">
+      <span class="ds-section__num">— 04</span>
+      <h2 class="ds-section__title">Tags & Badges</h2>
+      <span class="ds-section__kanji">紋</span>
+    </div>
+
+    <div class="ds-row">
+      <span class="ds-label">Couleurs</span>
+      <span class="sg-tag sg-tag--gold"><span class="sg-dot"></span>Officiel</span>
+      <span class="sg-tag sg-tag--shu"><span class="sg-dot"></span>Hi no Kuni</span>
+      <span class="sg-tag sg-tag--kon"><span class="sg-dot"></span>Mizu no Kuni</span>
+      <span class="sg-tag sg-tag--koke"><span class="sg-dot"></span>Tsuchi no Kuni</span>
+      <span class="sg-tag sg-tag--ghost">Hors-jeu</span>
+    </div>
+    <div class="ds-row">
+      <span class="ds-label">Rôles</span>
+      <span class="sg-tag sg-tag--gold">Daimyō</span>
+      <span class="sg-tag sg-tag--gold">Admin</span>
+      <span class="sg-tag sg-tag--shu">Modérateur</span>
+      <span class="sg-tag sg-tag--kon">Membre</span>
+      <span class="sg-tag sg-tag--ghost">Invité</span>
+    </div>
+  </section>
+
+  <!-- 05 AVATARS -->
+  <section class="ds-section">
+    <div class="ds-section__head">
+      <span class="ds-section__num">— 05</span>
+      <h2 class="ds-section__title">Avatars & Pastilles</h2>
+      <span class="ds-section__kanji">姿</span>
+    </div>
+
+    <div class="ds-row">
+      <span class="ds-label">Tailles</span>
+      <div class="sg-avatar sg-avatar--sm">武</div>
+      <div class="sg-avatar sg-avatar--md">侍</div>
+      <div class="sg-avatar sg-avatar--lg">将</div>
+    </div>
+    <div class="ds-row">
+      <span class="ds-label">Bordures de clan</span>
+      <div class="sg-avatar sg-avatar--md sg-avatar--gold">朱</div>
+      <div class="sg-avatar sg-avatar--md sg-avatar--shu">火</div>
+      <div class="sg-avatar sg-avatar--md sg-avatar--kon">水</div>
+      <div class="sg-avatar sg-avatar--md sg-avatar--koke">土</div>
+    </div>
+  </section>
+
+  <!-- 06 BREADCRUMB -->
+  <section class="ds-section">
+    <div class="ds-section__head">
+      <span class="ds-section__num">— 06</span>
+      <h2 class="ds-section__title">Fil d'Ariane</h2>
+      <span class="ds-section__kanji">道</span>
+    </div>
+    <div class="ds-row">
+      <nav class="sg-breadcrumb">
+        <a href="#">Accueil</a>
+        <span class="sg-breadcrumb__sep">◆</span>
+        <a href="#">Hi no Kuni</a>
+        <span class="sg-breadcrumb__sep">◆</span>
+        <span class="sg-breadcrumb__current">Le Pavillon Écarlate</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- 07 DIVIDERS -->
+  <section class="ds-section">
+    <div class="ds-section__head">
+      <span class="ds-section__num">— 07</span>
+      <h2 class="ds-section__title">Séparateurs</h2>
+      <span class="ds-section__kanji">境</span>
+    </div>
+    <div class="ds-row ds-row--col">
+      <div class="sg-divider">
+        <span class="sg-divider__line"></span>
+        <span class="sg-divider__glyph">時</span>
+        <span class="sg-divider__line"></span>
+      </div>
+      <div class="sg-divider">
+        <span class="sg-divider__line"></span>
+        <span class="sg-divider__diamond"></span>
+        <span class="sg-divider__line"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 FORMS -->
+  <section class="ds-section">
+    <div class="ds-section__head">
+      <span class="ds-section__num">— 08</span>
+      <h2 class="ds-section__title">Champs de saisie</h2>
+      <span class="ds-section__kanji">筆</span>
+    </div>
+
+    <div class="ds-row ds-row--col">
+      <div class="ds-grid-2">
+        <div>
+          <label class="sg-label">Nom de samouraï</label>
+          <input class="sg-input" placeholder="Oda Nobunaga" type="text">
+        </div>
+        <div>
+          <label class="sg-label">Clan d'allégeance</label>
+          <select class="sg-select">
+            <option>— Choisir —</option>
+            <option>Hi no Kuni</option>
+            <option>Kaze no Kuni</option>
+            <option>Mizu no Kuni</option>
+          </select>
+        </div>
+        <div style="grid-column: 1/-1">
+          <label class="sg-label">Recherche</label>
+          <div class="sg-search">
+            <span class="sg-search__icon">⚲</span>
+            <input placeholder="Chercher un sujet, un membre…">
+          </div>
+        </div>
+        <div style="grid-column: 1/-1">
+          <label class="sg-label">Message</label>
+          <textarea class="sg-textarea" rows="4" placeholder="Couchez vos pensées sur le parchemin…"></textarea>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 SECTION HEADERS -->
+  <section class="ds-section">
+    <div class="ds-section__head">
+      <span class="ds-section__num">— 09</span>
+      <h2 class="ds-section__title">Headers de catégorie</h2>
+      <span class="ds-section__kanji">章</span>
+    </div>
+
+    <div class="ds-row ds-row--col">
+      <span class="ds-label" style="margin-bottom: 8px">Style barre — utilisé pour Les Fondements / L'Univers</span>
+      <div class="sg-section-bar">
+        <div class="sg-section-bar__ornament"></div>
+        <div class="sg-section-bar__number">— 01</div>
+        <h3 class="sg-section-bar__title">Les Fondements</h3>
+        <span class="sg-section-bar__kanji">基礎</span>
+      </div>
+      <div class="sg-section-bar" style="margin-top: 12px">
+        <div class="sg-section-bar__ornament"></div>
+        <div class="sg-section-bar__number">— 02</div>
+        <h3 class="sg-section-bar__title">L'Univers</h3>
+        <span class="sg-section-bar__kanji">世界</span>
+      </div>
+    </div>
+
+    <div class="ds-row ds-row--col" style="margin-top: 20px">
+      <span class="ds-label" style="margin-bottom: 8px">Aside régional — utilisé pour les "no Kuni"</span>
+      <div class="ds-grid-3">
+        <aside class="sg-region-aside" data-clan="hi">
+          <div class="sg-region-aside__kanji-big">火</div>
+          <div class="sg-region-aside__eyebrow">— Pays du Feu</div>
+          <h3 class="sg-region-aside__title">Hi no Kuni</h3>
+          <span class="sg-region-aside__divider"></span>
+          <p class="sg-region-aside__desc">Terres ardentes des forgerons et des guerriers de la flamme éternelle.</p>
+        </aside>
+        <aside class="sg-region-aside" data-clan="mizu">
+          <div class="sg-region-aside__kanji-big">水</div>
+          <div class="sg-region-aside__eyebrow">— Pays de l'Eau</div>
+          <h3 class="sg-region-aside__title">Mizu no Kuni</h3>
+          <span class="sg-region-aside__divider"></span>
+          <p class="sg-region-aside__desc">Archipels brumeux où les clans naviguent entre marées et secrets.</p>
+        </aside>
+        <aside class="sg-region-aside" data-clan="tsuchi">
+          <div class="sg-region-aside__kanji-big">土</div>
+          <div class="sg-region-aside__eyebrow">— Pays de la Terre</div>
+          <h3 class="sg-region-aside__title">Tsuchi no Kuni</h3>
+          <span class="sg-region-aside__divider"></span>
+          <p class="sg-region-aside__desc">Montagnes immuables, racines anciennes, forteresses dans la roche.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 FORUM CARDS -->
+  <section class="ds-section">
+    <div class="ds-section__head">
+      <span class="ds-section__num">— 10</span>
+      <h2 class="ds-section__title">Cards de forum</h2>
+      <span class="ds-section__kanji">広間</span>
+    </div>
+
+    <div class="ds-row ds-row--col">
+      <span class="ds-label" style="margin-bottom: 8px">Variante A — Minimale (grille)</span>
+      <div class="ds-grid-3">
+        <article class="sg-forum-mini">
+          <div class="sg-forum-mini__tags"><span class="sg-tag sg-tag--gold">Lecture</span></div>
+          <h4 class="sg-forum-mini__title">Le Codex</h4>
+          <p class="sg-forum-mini__desc">L'histoire, les dieux et le contexte du monde shinobi.</p>
+          <div class="sg-forum-mini__foot">
+            <div class="sg-forum-mini__stats"><span><b>24</b> sujets</span><span><b>312</b> msg</span></div>
+            <a class="sg-tag sg-tag--ghost" href="#">Entrer →</a>
+          </div>
+        </article>
+        <article class="sg-forum-mini">
+          <div class="sg-forum-mini__tags"><span class="sg-tag sg-tag--gold">Règles</span></div>
+          <h4 class="sg-forum-mini__title">Les Préceptes</h4>
+          <p class="sg-forum-mini__desc">Code d'honneur du forum et conventions de jeu.</p>
+          <div class="sg-forum-mini__foot">
+            <div class="sg-forum-mini__stats"><span><b>12</b> sujets</span><span><b>89</b> msg</span></div>
+            <a class="sg-tag sg-tag--ghost" href="#">Entrer →</a>
+          </div>
+        </article>
+        <article class="sg-forum-mini">
+          <div class="sg-forum-mini__tags"><span class="sg-tag sg-tag--shu">Système</span></div>
+          <h4 class="sg-forum-mini__title">L'Art du Combat</h4>
+          <p class="sg-forum-mini__desc">Mécaniques de duel, jets, techniques shinobi.</p>
+          <div class="sg-forum-mini__foot">
+            <div class="sg-forum-mini__stats"><span><b>18</b> sujets</span><span><b>421</b> msg</span></div>
+            <a class="sg-tag sg-tag--ghost" href="#">Entrer →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="ds-row ds-row--col" style="margin-top: 20px">
+      <span class="ds-label" style="margin-bottom: 8px">Variante B — Standard (rangée)</span>
+      <article class="sg-forum-row">
+        <div>
+          <div class="sg-forum-row__head">
+            <h4 class="sg-forum-row__title">La Place du Marché</h4>
+            <span class="sg-tag sg-tag--gold">Public</span>
+          </div>
+          <p class="sg-forum-row__desc">Échanges, troc, recrutement de mercenaires et annonces des marchands ambulants.</p>
+          <div class="sg-forum-row__tags">
+            <span class="sg-tag sg-tag--ghost">Marchands</span>
+            <span class="sg-tag sg-tag--ghost">Annonces</span>
+          </div>
+        </div>
+        <div class="sg-forum-row__side">
+          <div class="sg-mono">86 sujets · 1,204 msg</div>
+          <div style="display:flex; align-items:center; gap:10px">
+            <div class="sg-avatar sg-avatar--sm sg-avatar--gold">商</div>
+            <div style="text-align:right">
+              <div class="sg-body-sm" style="color: var(--sg-paper-100)">Akiyama no Kage</div>
+              <div class="sg-mono" style="font-size: 9px">il y a 2h</div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="ds-row ds-row--col" style="margin-top: 20px">
+      <span class="ds-label" style="margin-bottom: 8px">Variante C — Riche avec image (utilisée par les sous-forums "no Kuni")</span>
+      <article class="sg-forum-rich" data-clan="hi">
+        <div class="sg-forum-rich__body">
+          <div class="sg-forum-rich__head">
+            <h4 class="sg-forum-rich__title">Le Pavillon Écarlate</h4>
+            <span class="sg-tag sg-tag--shu">Hi no Kuni</span>
+          </div>
+          <p class="sg-forum-rich__desc">La cour du daimyō et ses intrigues à la lueur des braseros. Lieu des audiences solennelles et des trahisons murmurées.</p>
+          <div class="sg-forum-rich__tags">
+            <span class="sg-tag sg-tag--ghost">Politique</span>
+            <span class="sg-tag sg-tag--ghost">Cour</span>
+          </div>
+          <div class="sg-forum-rich__stats">
+            <span><b>42</b> SUJETS</span>
+            <span><b>891</b> MESSAGES</span>
+            <span style="margin-left:auto">DERNIER · <b>Hattori K.</b> · 14H</span>
+          </div>
+        </div>
+        <div class="sg-forum-rich__media">
+          <div class="sg-placeholder sg-placeholder--hi">
+            <span class="sg-placeholder__kanji">朱</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 11 STATS / ONLINE -->
+  <section class="ds-section">
+    <div class="ds-section__head">
+      <span class="ds-section__num">— 11</span>
+      <h2 class="ds-section__title">Statistiques & Présence</h2>
+      <span class="ds-section__kanji">記録</span>
+    </div>
+
+    <div class="ds-row ds-row--col">
+      <div class="sg-stats">
+        <div class="sg-stats__cell">
+          <div class="sg-stats__label">Membres</div>
+          <div class="sg-stats__value"><em>247</em></div>
+        </div>
+        <div class="sg-stats__cell">
+          <div class="sg-stats__label">Sujets</div>
+          <div class="sg-stats__value"><em>1,486</em></div>
+        </div>
+        <div class="sg-stats__cell">
+          <div class="sg-stats__label">Messages</div>
+          <div class="sg-stats__value"><em>23,412</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-row ds-row--col" style="margin-top: 20px">
+      <div class="sg-online">
+        <div class="sg-online__head">
+          <div class="sg-online__icon">人</div>
+          <h4 class="sg-online__title">Présents au Daimyōkan</h4>
+        </div>
+        <p class="sg-online__body">
+          <b>14 samouraïs</b> arpentent le forum à cette heure :
+          <a href="#">Hattori Kazuya</a>, <a href="#">Akiyama no Kage</a>, <a href="#">Tsuki Reiji</a>,
+          <a href="#">Mori no Honjō</a> et 10 autres.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 MOTIFS -->
+  <section class="ds-section">
+    <div class="ds-section__head">
+      <span class="ds-section__num">— 12</span>
+      <h2 class="ds-section__title">Motifs japonais</h2>
+      <span class="ds-section__kanji">和柄</span>
+    </div>
+    <div class="ds-row" style="gap:20px">
+      <div class="sg-motif-seigaiha" style="position:relative; height:160px; flex:1; background: var(--sg-ink-900); border:1px solid var(--sg-ink-700); border-radius: var(--sg-r-md); overflow:hidden">
+        <div style="position:relative; z-index:1; padding:20px; font-family:'Cinzel',serif; font-size:12px; letter-spacing:.24em; color:var(--sg-gold); text-transform:uppercase">Seigaiha 青海波<br><span style="color:var(--sg-paper-300); font-size:10px">Vagues océanes</span></div>
+      </div>
+      <div class="sg-motif-asanoha" style="position:relative; height:160px; flex:1; background: var(--sg-ink-900); border:1px solid var(--sg-ink-700); border-radius: var(--sg-r-md); overflow:hidden">
+        <div style="position:relative; z-index:1; padding:20px; font-family:'Cinzel',serif; font-size:12px; letter-spacing:.24em; color:var(--sg-gold); text-transform:uppercase">Asanoha 麻の葉<br><span style="color:var(--sg-paper-300); font-size:10px">Feuilles de chanvre</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 TOKENS REF -->
+  <section class="ds-section">
+    <div class="ds-section__head">
+      <span class="ds-section__num">— 13</span>
+      <h2 class="ds-section__title">Tokens (référence)</h2>
+      <span class="ds-section__kanji">記号</span>
+    </div>
+    <div class="ds-row ds-row--col">
+      <div class="ds-grid-2">
+        <table class="ds-token-table">
+          <tr><td>--sg-r-xs</td><td>2px</td></tr>
+          <tr><td>--sg-r-sm</td><td>3px</td></tr>
+          <tr><td>--sg-r-md</td><td>4px</td></tr>
+          <tr><td>--sg-r-lg</td><td>6px</td></tr>
+          <tr><td>--sg-s-1 → --sg-s-9</td><td>4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 96 px</td></tr>
+        </table>
+        <table class="ds-token-table">
+          <tr><td>--sg-shadow-sm</td><td>0 1px 2px rgba(0,0,0,.5)</td></tr>
+          <tr><td>--sg-shadow-md</td><td>0 4px 16px rgba(0,0,0,.4)…</td></tr>
+          <tr><td>--sg-shadow-lg</td><td>0 12px 40px rgba(0,0,0,.6)…</td></tr>
+          <tr><td>--sg-motif-opacity</td><td>0.06 (subtle) / 0.14 (rich)</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- GOOGLE FONT POOL (loaded for previewing) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Marcellus&family=Marcellus+SC&family=Cormorant+SC:wght@400;600&family=Trajan+Pro&family=Spectral+SC:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+DW+Pica:ital@0;1&family=IM+Fell+French+Canon:ital@0;1&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Cardo:ital,wght@0,400;0,700;1,400&family=Noto+Serif+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;600&family=Klee+One:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- TWEAKS TOGGLE -->
+<button id="tweaks-toggle" aria-label="Tweaks"
+        style="position:fixed; bottom:20px; right:20px; background:var(--sg-ink-900); border:1px solid var(--sg-gold-dim); color:var(--sg-gold); border-radius:50%; width:46px; height:46px; cursor:pointer; z-index:99; font-family:'Noto Serif JP',serif; font-size:18px; box-shadow:var(--sg-shadow-md)" title="Tweaks">調</button>
+
+<!-- TWEAKS PANEL -->
+<div id="tweaks" style="position:fixed; bottom:20px; right:20px; background:rgba(17,15,13,.97); border:1px solid var(--sg-ink-700); border-radius:var(--sg-r-md); padding:18px 20px; z-index:100; box-shadow: var(--sg-shadow-lg); display:none; flex-direction:column; gap:14px; min-width:280px; max-width:300px; backdrop-filter: blur(8px)">
+
+  <div style="display:flex; justify-content:space-between; align-items:center">
+    <div style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--sg-gold)">Tweaks</div>
+    <button id="tweaks-close" aria-label="Fermer" style="background:none; border:none; color:var(--sg-paper-300); cursor:pointer; font-size:22px; line-height:1; padding:0 4px">×</button>
+  </div>
+
+  <!-- Typo titres -->
+  <div style="display:flex; flex-direction:column; gap:6px; padding-top:8px; border-top:1px solid var(--sg-ink-800)">
+    <label for="tw-display" style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:var(--sg-gold-soft)">Typo titres</label>
+    <select id="tw-display" class="sg-select" style="padding:8px 10px; font-size:13px">
+      <optgroup label="Original">
+        <option value="'Cinzel', serif" selected>Cinzel (par défaut)</option>
+      </optgroup>
+      <optgroup label="Romain / Latin">
+        <option value="'Cinzel Decorative', serif">Cinzel Decorative</option>
+        <option value="'Marcellus', serif">Marcellus</option>
+        <option value="'Marcellus SC', serif">Marcellus SC</option>
+        <option value="'Cormorant SC', serif">Cormorant SC</option>
+        <option value="'Spectral SC', serif">Spectral SC</option>
+      </optgroup>
+      <optgroup label="Japonais">
+        <option value="'Noto Serif JP', serif">Noto Serif JP</option>
+        <option value="'Shippori Mincho', serif">Shippori Mincho</option>
+        <option value="'Klee One', serif">Klee One</option>
+      </optgroup>
+      <optgroup label="Sérif classique">
+        <option value="'EB Garamond', serif">EB Garamond</option>
+        <option value="'Cormorant Garamond', serif">Cormorant Garamond</option>
+      </optgroup>
+    </select>
+  </div>
+
+  <!-- Typo corps -->
+  <div style="display:flex; flex-direction:column; gap:6px">
+    <label for="tw-body" style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:var(--sg-gold-soft)">Typo corps</label>
+    <select id="tw-body" class="sg-select" style="padding:8px 10px; font-size:13px">
+      <optgroup label="Original">
+        <option value="'IM Fell English', serif" selected>IM Fell English (par défaut)</option>
+      </optgroup>
+      <optgroup label="IM Fell variants">
+        <option value="'IM Fell DW Pica', serif">IM Fell DW Pica</option>
+        <option value="'IM Fell French Canon', serif">IM Fell French Canon</option>
+      </optgroup>
+      <optgroup label="Sérif lisibles">
+        <option value="'EB Garamond', serif">EB Garamond</option>
+        <option value="'Cormorant Garamond', serif">Cormorant Garamond</option>
+        <option value="'Crimson Text', serif">Crimson Text</option>
+        <option value="'Lora', serif">Lora</option>
+        <option value="'Cardo', serif">Cardo</option>
+      </optgroup>
+      <optgroup label="Japonais">
+        <option value="'Noto Serif JP', serif">Noto Serif JP</option>
+        <option value="'Shippori Mincho', serif">Shippori Mincho</option>
+      </optgroup>
+    </select>
+  </div>
+
+  <!-- Échelle de titres -->
+  <div style="display:flex; flex-direction:column; gap:6px">
+    <label style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:var(--sg-gold-soft); display:flex; justify-content:space-between">
+      <span>Échelle des titres</span>
+      <span id="tw-scale-val" style="color:var(--sg-paper-300); letter-spacing:.1em">1.00×</span>
+    </label>
+    <input id="tw-scale" type="range" min="0.75" max="1.4" step="0.05" value="1" style="accent-color: var(--sg-gold)">
+  </div>
+
+  <!-- Espacement (letter-spacing) titres -->
+  <div style="display:flex; flex-direction:column; gap:6px">
+    <label style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:var(--sg-gold-soft); display:flex; justify-content:space-between">
+      <span>Letter-spacing titres</span>
+      <span id="tw-tracking-val" style="color:var(--sg-paper-300); letter-spacing:.1em">0.18em</span>
+    </label>
+    <input id="tw-tracking" type="range" min="0" max="0.4" step="0.02" value="0.18" style="accent-color: var(--sg-gold)">
+  </div>
+
+  <!-- Motifs -->
+  <div style="display:flex; flex-direction:column; gap:8px; padding-top:10px; border-top:1px solid var(--sg-ink-800)">
+    <label style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:var(--sg-gold-soft)">Motifs japonais</label>
+    <label style="display:flex; align-items:center; gap:8px; font-size:13px; color:var(--sg-paper-200); cursor:pointer">
+      <input type="radio" name="motifs" value="subtle" checked> Subtils
+    </label>
+    <label style="display:flex; align-items:center; gap:8px; font-size:13px; color:var(--sg-paper-200); cursor:pointer">
+      <input type="radio" name="motifs" value="rich"> Plus présents
+    </label>
+  </div>
+
+  <!-- Reset -->
+  <button id="tw-reset" class="sg-btn sg-btn--secondary sg-btn--sm" style="margin-top:4px">Réinitialiser</button>
+</div>
+
+<script>
+  // Toggle panel visibility
+  const tw_panel = document.getElementById('tweaks');
+  const tw_toggle = document.getElementById('tweaks-toggle');
+  const tw_close = document.getElementById('tweaks-close');
+  tw_toggle.addEventListener('click', () => { tw_panel.style.display = 'flex'; tw_toggle.style.display = 'none'; });
+  tw_close.addEventListener('click', () => { tw_panel.style.display = 'none'; tw_toggle.style.display = 'block'; });
+
+  const root = document.documentElement;
+  const $display = document.getElementById('tw-display');
+  const $body = document.getElementById('tw-body');
+  const $scale = document.getElementById('tw-scale');
+  const $scaleVal = document.getElementById('tw-scale-val');
+  const $track = document.getElementById('tw-tracking');
+  const $trackVal = document.getElementById('tw-tracking-val');
+  const $reset = document.getElementById('tw-reset');
+
+  // Display font (titles) — overrides --sg-font-display
+  $display.addEventListener('change', e => {
+    root.style.setProperty('--sg-font-display', e.target.value);
+  });
+
+  // Body font — overrides --sg-font-serif (and applies to body fallback)
+  $body.addEventListener('change', e => {
+    root.style.setProperty('--sg-font-serif', e.target.value);
+    document.body.style.fontFamily = e.target.value;
+  });
+
+  // Title scale — applies via a multiplier custom property
+  function applyScale() {
+    const v = parseFloat($scale.value);
+    $scaleVal.textContent = v.toFixed(2) + '×';
+    // Inject / update a runtime style that scales every title class
+    let sheet = document.getElementById('tw-scale-sheet');
+    if (!sheet) {
+      sheet = document.createElement('style');
+      sheet.id = 'tw-scale-sheet';
+      document.head.appendChild(sheet);
+    }
+    sheet.textContent = `
+      .sg-h1 { font-size: ${56 * v}px !important; }
+      .sg-h2 { font-size: ${32 * v}px !important; }
+      .sg-h3 { font-size: ${20 * v}px !important; }
+      .sg-h4 { font-size: ${14 * v}px !important; }
+      .ds-intro__title { font-size: ${48 * v}px !important; }
+      .ds-section__title { font-size: ${22 * v}px !important; }
+      .sg-hero__title { font-size: ${64 * v}px !important; }
+      .sg-forum-mini__title { font-size: ${15 * v}px !important; }
+      .sg-forum-row__title { font-size: ${17 * v}px !important; }
+      .sg-forum-rich__title { font-size: ${18 * v}px !important; }
+      .sg-region-aside__title { font-size: ${22 * v}px !important; }
+      .sg-section-bar__title { font-size: ${16 * v}px !important; }
+    `;
+  }
+  $scale.addEventListener('input', applyScale);
+
+  // Letter-spacing on titles
+  function applyTracking() {
+    const v = parseFloat($track.value);
+    $trackVal.textContent = v.toFixed(2) + 'em';
+    let sheet = document.getElementById('tw-track-sheet');
+    if (!sheet) {
+      sheet = document.createElement('style');
+      sheet.id = 'tw-track-sheet';
+      document.head.appendChild(sheet);
+    }
+    sheet.textContent = `
+      .sg-h1, .sg-h2, .sg-h3, .sg-h4,
+      .ds-intro__title, .ds-section__title,
+      .sg-hero__title, .sg-forum-mini__title,
+      .sg-forum-row__title, .sg-forum-rich__title,
+      .sg-region-aside__title, .sg-section-bar__title { letter-spacing: ${v}em !important; }
+    `;
+  }
+  $track.addEventListener('input', applyTracking);
+
+  // Motifs
+  document.querySelectorAll('input[name="motifs"]').forEach(radio => {
+    radio.addEventListener('change', e => {
+      root.setAttribute('data-motifs', e.target.value);
+    });
+  });
+
+  // Reset
+  $reset.addEventListener('click', () => {
+    $display.value = "'Cinzel', serif";
+    $body.value = "'IM Fell English', serif";
+    $scale.value = 1;
+    $track.value = 0.18;
+    document.querySelector('input[name="motifs"][value="subtle"]').checked = true;
+    root.style.removeProperty('--sg-font-display');
+    root.style.removeProperty('--sg-font-serif');
+    document.body.style.fontFamily = '';
+    root.removeAttribute('data-motifs');
+    const s1 = document.getElementById('tw-scale-sheet'); if (s1) s1.textContent = '';
+    const s2 = document.getElementById('tw-track-sheet'); if (s2) s2.textContent = '';
+    $scaleVal.textContent = '1.00×';
+    $trackVal.textContent = '0.18em';
+  });
+</script>
+
+</body>
+</html>

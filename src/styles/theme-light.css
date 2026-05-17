@@ -1,0 +1,98 @@
+/* ============================================================
+   LIGHT MODE — parchemin washi éclairé
+   Surcharge des tokens --sg-* + correctifs ciblés pour les
+   composants qui codent en dur des couleurs "dark only".
+   ============================================================ */
+
+[data-theme="light"] {
+  /* Fonds : du plus clair (1000) au plus contrasté (500). */
+  --sg-ink-1000: #fdf9ee;
+  --sg-ink-950: #f6efdb;
+  --sg-ink-900: #efe6cd;
+  --sg-ink-850: #e9dec2;
+  --sg-ink-800: #e1d4b1;
+  --sg-ink-700: #cabd97;
+  --sg-ink-600: #b3a37a;
+  --sg-ink-500: #94855e;
+
+  /* Texte : encre sombre chaude. */
+  --sg-paper-50: #1b1710;
+  --sg-paper-100: #2a2418;
+  --sg-paper-200: #463d28;
+  --sg-paper-300: #62573b;
+  --sg-paper-400: #837659;
+
+  /* Or : conservé comme accent, assombri pour le contraste sur clair. */
+  --sg-gold: #a07628;
+  --sg-gold-soft: #856222;
+  --sg-gold-dim: #c7b07a;
+  --sg-gold-glow: #6f4f17;
+
+  /* Accents : teinte conservée, luminosité adaptée. */
+  --sg-shu: #a5392b;
+  --sg-shu-soft: #8a2d22;
+  --sg-shu-deep: #c66a5d;
+
+  --sg-kon: #3a4f7d;
+  --sg-kon-soft: #2c3d61;
+  --sg-kon-deep: #6e83b0;
+
+  --sg-koke: #5a6f44;
+  --sg-koke-soft: #475833;
+  --sg-koke-deep: #87996b;
+
+  --sg-success: #4f6e34;
+  --sg-warn: #a07628;
+  --sg-error: #a63c2f;
+
+  /* Ombres douces. */
+  --sg-shadow-sm: 0 1px 2px rgba(60, 45, 20, 0.08);
+  --sg-shadow-md: 0 4px 16px rgba(60, 45, 20, 0.1),
+    0 1px 0 rgba(160, 118, 40, 0.06) inset;
+  --sg-shadow-lg: 0 12px 40px rgba(60, 45, 20, 0.14),
+    0 1px 0 rgba(160, 118, 40, 0.08) inset;
+}
+
+/* --- Correctifs composants (couleurs codées en dur en dark) --- */
+
+[data-theme="light"] body,
+[data-theme="light"] html {
+  background: var(--sg-ink-950);
+  color: var(--sg-paper-100);
+}
+
+/* Nav : fond rgba sombre → parchemin translucide. */
+[data-theme="light"] .sg-nav {
+  background: rgba(246, 239, 219, 0.85);
+  border-bottom-color: var(--sg-ink-700);
+}
+
+/* Bouton primaire : le texte était ink-950 (devenu clair) → forcer sombre. */
+[data-theme="light"] .sg-btn--primary {
+  color: #2a2418;
+}
+
+/* Pastilles : couleurs de texte éclaircies en dark → assombrir. */
+[data-theme="light"] .sg-tag--shu {
+  color: #8a2d22;
+  background: rgba(165, 57, 43, 0.1);
+}
+[data-theme="light"] .sg-tag--kon {
+  color: #2c3d61;
+  background: rgba(58, 79, 125, 0.12);
+}
+[data-theme="light"] .sg-tag--koke {
+  color: #475833;
+  background: rgba(90, 111, 68, 0.12);
+}
+
+/* Hero : dégradés radiaux sombres → tons parchemin. */
+[data-theme="light"] .sg-hero {
+  background: radial-gradient(ellipse at 50% 0%, #fbf4e2 0%, #f0e6cd 70%),
+    var(--sg-ink-950);
+}
+
+/* Footer : fond très sombre → crème. */
+[data-theme="light"] .sg-footer {
+  background: var(--sg-ink-1000);
+}

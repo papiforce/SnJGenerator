@@ -1,0 +1,374 @@
+@import "./design-system.css";
+@import "./theme-light.css";
+
+html,
+body,
+#root {
+  max-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+:focus-visible {
+  outline: 2px solid var(--sg-gold);
+  outline-offset: 2px;
+}
+
+/* ---------- App shell ---------- */
+.app-main {
+  flex: 1;
+  width: 100%;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.app-page {
+  padding: 48px 0 80px;
+}
+
+.app-page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.app-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.app-spacer {
+  flex: 1;
+}
+
+/* ---------- Fiche grid (home) ---------- */
+.app-fiche-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.app-fiche-card {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.app-fiche-card:hover {
+  border-color: var(--sg-gold-dim);
+  transform: translateY(-2px);
+  box-shadow: var(--sg-shadow-md);
+  transition: all 0.25s ease;
+}
+
+/* ---------- Saves panel ---------- */
+.app-saves {
+  margin-top: 48px;
+}
+
+.app-save-list {
+  display: grid;
+  gap: 12px;
+}
+
+.app-save-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+}
+
+.app-save-card__meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.app-save-card__name {
+  font-family: var(--sg-font-display);
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sg-paper-50);
+}
+
+.app-save-card__sub {
+  font-family: var(--sg-font-mono);
+  font-size: 11px;
+  color: var(--sg-paper-400);
+  margin-top: 4px;
+}
+
+.app-empty {
+  padding: 40px;
+  text-align: center;
+  color: var(--sg-paper-400);
+  font-style: italic;
+}
+
+/* ---------- Modal ---------- */
+.app-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 5, 5, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 100;
+}
+
+.app-modal {
+  width: 100%;
+  max-width: 460px;
+  padding: 32px;
+}
+
+.app-modal__title {
+  font-family: var(--sg-font-display);
+  font-size: 18px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sg-paper-50);
+  margin-bottom: 8px;
+}
+
+.app-modal__desc {
+  font-size: 13px;
+  color: var(--sg-paper-300);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.app-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.app-field + .app-field {
+  margin-top: 16px;
+}
+
+/* ---------- Chrono list editor ---------- */
+.app-chrono-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.app-chrono-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--sg-ink-700);
+  border-radius: var(--sg-r-sm);
+  background: var(--sg-ink-900);
+}
+
+.app-chrono-item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-error {
+  color: var(--sg-error);
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+/* ---------- Editor 3 columns ---------- */
+.app-editor {
+  display: grid;
+  grid-template-columns: 240px 1fr 360px;
+  gap: 1px;
+  background: var(--sg-ink-700);
+  height: calc(100vh - 61px);
+  overflow: hidden;
+}
+
+.app-editor--no-components {
+  grid-template-columns: 1fr 360px;
+}
+
+.app-editor__col {
+  background: var(--sg-ink-950);
+  overflow-y: auto;
+  padding: 24px 20px;
+}
+
+.app-editor__col--preview {
+  padding: 0;
+  background: var(--sg-ink-900);
+}
+
+.app-col-title {
+  font-family: var(--sg-font-display);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--sg-gold-soft);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--sg-ink-700);
+}
+
+.app-preview-frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #fff;
+}
+
+/* ---------- Component list ---------- */
+.app-comp {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--sg-ink-700);
+  border-radius: var(--sg-r-sm);
+  background: var(--sg-ink-900);
+  margin-bottom: 8px;
+}
+
+.app-comp__label {
+  flex: 1;
+  font-size: 13px;
+  color: var(--sg-paper-200);
+}
+
+.app-comp.is-inactive {
+  opacity: 0.5;
+}
+
+.app-comp__btns {
+  display: flex;
+  gap: 4px;
+}
+
+.app-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--sg-ink-700);
+  border-radius: var(--sg-r-xs);
+  background: var(--sg-ink-850);
+  color: var(--sg-paper-300);
+}
+
+.app-iconbtn:hover:not(:disabled) {
+  border-color: var(--sg-gold-dim);
+  color: var(--sg-gold);
+}
+
+.app-iconbtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ---------- Editor fields ---------- */
+.app-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--sg-ink-800);
+  border: 1px solid var(--sg-gold-dim);
+  color: var(--sg-paper-50);
+  padding: 12px 24px;
+  border-radius: var(--sg-r-sm);
+  font-size: 13px;
+  z-index: 200;
+  box-shadow: var(--sg-shadow-lg);
+}
+
+/* ---------- Admin gate ---------- */
+.app-gate {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.app-gate__card {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px 32px;
+  text-align: center;
+}
+
+/* ---------- Responsive : éditeur en onglets ---------- */
+.app-tabs {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .app-editor {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .app-editor__col {
+    display: none;
+  }
+
+  .app-editor__col.is-active {
+    display: block;
+  }
+
+  .app-editor__col--preview.is-active {
+    height: 70vh;
+  }
+
+  .app-tabs {
+    display: flex;
+    gap: 1px;
+    background: var(--sg-ink-700);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .app-tab {
+    flex: 1;
+    padding: 14px;
+    background: var(--sg-ink-900);
+    font-family: var(--sg-font-display);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sg-paper-300);
+  }
+
+  .app-tab.is-active {
+    color: var(--sg-gold);
+    background: var(--sg-ink-850);
+  }
+
+  .app-container {
+    padding: 0 20px;
+  }
+}
