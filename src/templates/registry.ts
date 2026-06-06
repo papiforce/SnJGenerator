@@ -1,9 +1,15 @@
 import type { FicheCategory, FicheConfig, FicheTemplate } from "@/types";
 import { config as fichePresentationConfig } from "./fiche-de-presentation/config";
 import fichePresentationHtml from "./fiche-de-presentation/template.html?raw";
+import { config as ficheValidationConfig } from "./fiche-validation-presentation/config";
+import ficheValidationHtml from "./fiche-validation-presentation/template.html?raw";
+import { config as techniqueConfig } from "./technique/config";
+import techniqueHtml from "./technique/template.html?raw";
 
 const TEMPLATES: FicheTemplate[] = [
   { config: fichePresentationConfig, html: fichePresentationHtml },
+  { config: techniqueConfig, html: techniqueHtml },
+  { config: ficheValidationConfig, html: ficheValidationHtml },
 ];
 
 const BY_SLUG = new Map(TEMPLATES.map((t) => [t.config.slug, t]));
